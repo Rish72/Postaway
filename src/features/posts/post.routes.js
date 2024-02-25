@@ -11,3 +11,5 @@ postRouter.get('/:id', postController.getOne)
 postRouter.post("/addPost", postController.addPost);
 postRouter.delete("/delete/:id", postController.deletePost);
 postRouter.put("/updat/:id", postController.updatePost);
+
+export default postRouter

@@ -12,8 +12,8 @@ export default class PostModel{
     }
 
     static getOne(id){
-        const post = post.find( post => post.id === id);
-        console.log(`Specific POST of ${id} : ` +post);
+        const post = posts.find( post => post.id == id);
+        console.log(`Specific POST of id ${id} : ` +post);
         return post
     }
 
@@ -23,9 +23,9 @@ export default class PostModel{
         return UserSpecificPosts;
     }
 
-    static add(){
-        const {userID, caption , imageUrl} = data
-        const newPost = new PostModel(post.length+1, userID, caption, imageUrl);
+    static add(data){
+        const {userID, caption , imageUrl} = data;
+        const newPost = new PostModel(posts.length+1, userID, caption, imageUrl);
         posts.push(newPost);
         return newPost
     }
@@ -34,8 +34,16 @@ export default class PostModel{
 
     }
 
-    static delete(){
-
+    static delete(id){
+        const postIndex = posts.findIndex( post => post.id == id)
+        console.log("postIndex "+postIndex);
+        if(postIndex == -1){
+            return "Not Found"  
+        } 
+        else {
+            posts.splice(postIndex,1);
+            return posts;
+        }
     }
 }
 
@@ -51,5 +59,17 @@ let posts = [
         userID : 1,
         caption: "New Post about Cars",
         imageUrl : "https://static.autox.com/uploads/2022/11/2023-BMW-S1000RR.jpg"
+    },
+    {
+        id : 3,
+        "userID" : 2, 
+        "caption" : "New Post about Phones",
+        "imageUrl" : "https://m-cdn.phonearena.com/images/article/64576-wide-two_1200/The-Best-Phones-to-buy-in-2024---our-top-10-list.webp?1708514976"
+    },
+    {
+        id : 4,
+        "userID" : 2, 
+        "caption" : "New Post about Phones",
+        "imageUrl" : "https://m-cdn.phonearena.com/images/article/64576-wide-two_1200/The-Best-Phones-to-buy-in-2024---our-top-10-list.webp?1708514976"
     }
 ];
