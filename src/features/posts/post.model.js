@@ -25,6 +25,7 @@ export default class PostModel{
 
     static add(data){
         const {userID, caption , imageUrl} = data;
+        console.log(caption+" image url "+imageUrl);
         const newPost = new PostModel(posts.length+1, userID, caption, imageUrl);
         posts.push(newPost);
         return newPost

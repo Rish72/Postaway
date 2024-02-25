@@ -22,12 +22,20 @@ export default class PostController{
     }
 
     addPost(req, res){
-        const postData = req.body;
-        if(postData){
-            const newPost = PostModel.add(postData);
+        const {userID, caption} = req.body;
+        console.log(userID+" < userid and caption >  "+caption);
+        let imageUrl = req.file.filename;
+        console.log("image url "+ imageUrl);
+        if(imageUrl){
+            const newPost = {
+                userID : userID,
+                caption : caption,
+                imageUrl : req.file.filename,
+            };
+            PostModel.add(newPost);
             return res.status(200).send(newPost)
         }else{
-            return res.status(401).send("Unable to add post")
+            return res.status(400).send("Unable to add post")
         }
     }
 
