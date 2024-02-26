@@ -6,12 +6,12 @@ export default class PostModel{
         this.caption = caption;
         this.imageUrl = imageUrl;
     }
-
     static getPosts(){
         return posts;
     }
 
     static getOne(id){
+        //! valid user
         const post = posts.find( post => post.id == id);
         console.log(`Specific POST of id ${id} : ` +post);
         return post
@@ -24,6 +24,7 @@ export default class PostModel{
     }
 
     static add(data){
+        //! valid user
         const {userID, caption , imageUrl} = data;
         console.log(caption+" image url "+imageUrl);
         const newPost = new PostModel(posts.length+1, userID, caption, imageUrl);

@@ -4,7 +4,6 @@
 // const path = require('path');
 import multer from "multer";
 import fs from 'fs';
-const port = 3000;
 
 // Define the upload directory
 const uploadDirectory = './uploads';

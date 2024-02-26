@@ -52,4 +52,18 @@ export default class PostController{
     updatePost(req, res){
 
     }
+
+    //! FILTER A POST BASED ON THEIR CAPTION
+    //? we can add simple loop and find the caption which is asked and return array of posts of that caption 
+
+    //! FEATURE TO SAVE A POST AS A DRAFT AND TO ARCHIVE A POST
+    //? have no idea about this
+
+    //! SORTING OF POSTS BASED ON USER ENGAGEMENT AND DATE
+    //? I can attach TIME OF CREATION and then we can sort it on that basis
+
+    //! BOOKMARK A POST 
+    //? i THINK we can bookmark the problem in localstorange and fetch those whenever it is called (I dont know if I can do this in API format)
+
+    //! PAGINATION FOR POSTS AND COMMENTS
 }
