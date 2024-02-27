@@ -10,11 +10,14 @@ export default class PostModel{
         return posts;
     }
 
-    static getOne(id){
+    static getOnePost(id){
         //! valid user
         const post = posts.find( post => post.id == id);
-        console.log(`Specific POST of id ${id} : ` +post);
-        return post
+        if(post){
+            console.log(`Specific POST of id ${id} : ` +post);
+            return post
+        }
+        else return {msg : "NO SUCH POST FOUND"};
     }
 
     static getUserPost(data){       // give posts based on User Credentials
@@ -54,7 +57,22 @@ let posts = [
         id : 1, 
         userID : 1,
         caption: "New Post about movies",
-        imageUrl : "https://hips.hearstapps.com/hmg-prod/images/best-fall-movies-1659459329.jpg?crop=0.937xw:1.00xh;0.0327xw,0&resize=1200:*"
+        imageUrl : "https://hips.hearstapps.com/hmg-prod/images/best-fall-movies-1659459329.jpg?crop=0.937xw:1.00xh;0.0327xw,0&resize=1200:*",
+        comment : [
+            {
+                id : 1,
+                postID : 1 ,
+                userID :  2,
+                content : "NICE POST"
+            } ,
+            {
+                id : 2,
+                postID : 1 ,
+                userID :  3,
+                content : "gOOD POST"
+            } 
+        ]
+
     },
     {
         id : 2, 

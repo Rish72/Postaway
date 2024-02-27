@@ -9,7 +9,7 @@ export default class PostController{
 
     getOne(req, res){
         const id = req.params.id;
-        let post = PostModel.getOne(id);
+        let post = PostModel.getOnePost(id);
         if(post){
             return res.status(200).send(post);
         }else{
