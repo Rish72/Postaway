@@ -2,6 +2,7 @@ import express from "express";
 import userRouter from "./src/features/user/user.routes.js";
 import bodyParser from "body-parser";
 import postRouter from "./src/features/posts/post.routes.js";
+import commentsRouter from "./src/features/comments/comm.routes.js";
 
 
 const app = express();
@@ -12,7 +13,7 @@ const port = 3000;
 //      M I D D L E W A R E S
 app.use("/api/users", userRouter)
 app.use("/api/posts", postRouter)
-
+app.use("/api/comments", commentsRouter)
 
 
 app.get('/', (req, res) => {
