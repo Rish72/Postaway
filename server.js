@@ -3,6 +3,7 @@ import userRouter from "./src/features/user/user.routes.js";
 import bodyParser from "body-parser";
 import postRouter from "./src/features/posts/post.routes.js";
 import commentsRouter from "./src/features/comments/comm.routes.js";
+import likeRouter from "./src/features/likes/like.routes.js";
 
 
 const app = express();
@@ -14,7 +15,7 @@ const port = 3000;
 app.use("/api/users", userRouter)
 app.use("/api/posts", postRouter)
 app.use("/api/comments", commentsRouter)
-
+app.use("/api/likes", likeRouter)
 
 app.get('/', (req, res) => {
     res.send("Welcome to PostAway <sub>A social media backend project<sub>");
