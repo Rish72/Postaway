@@ -26,13 +26,15 @@ export default class CommentsModel{
         const post = PostModel.getPosts().find( post => post.id == postID ) // add user check also
         if(!post.comment){
             post.comment = [];
-            let userID = 23; // verify && add on the basis of logged in user
+            let userID = 23; //! verify && add on the basis of logged in user
 
             //use contructor
             const newComment = new CommentsModel(post.comment.length+1, postID, userID, content);
             post.comment.push(newComment);
-            //!after adding each comment I should also maintain a variable for keeping count of the comments; 
-            //? implement the above
+
+
+            //after adding each comment I should also maintain a variable for keeping count of the comments; 
+            //? CAN BE ACHIEVED BY JUST PRINTING THE LENGTH THE COMMENTS ARRAY OF THAT SPECIFIC POST
             console.log("length of comments "+post.comment.length); 
             return post.comment;
         }else {
@@ -44,8 +46,8 @@ export default class CommentsModel{
         
     }
 
-    static delete(){
-
+    static delete(data){
+        const {postID , id} = data;
     }
 
     static update(){

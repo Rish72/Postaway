@@ -1,3 +1,19 @@
+
+export default class LikeModel{
+
+    constructor(){
+
+    }
+
+    get(){     // returns all likes of a specific post
+
+    }
+
+    toggle(){       // work as a switch for like/remove
+
+    }
+}
+
 /*
     like object structure
 
