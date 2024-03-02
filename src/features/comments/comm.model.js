@@ -50,7 +50,18 @@ export default class CommentsModel{
         const {postID , id} = data;
     }
 
-    static update(){
+    static update(data){
+        const {commentID, content, userID} = data;
+        const post = PostModel.getPosts().find( post => post.userID == userID) 
+        console.log("post in update "+post);
+        if(post && commentID > 1){
+            console.log("COmment id - 1 : "+ commentID - 1);
+            post.comment[commentID - 1].content = content;
+
+            return post;
+        }else {
+            return { "status" : "false", "msg" : "Post Not found"}
+        }
 
     }
 

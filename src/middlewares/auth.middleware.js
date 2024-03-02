@@ -8,6 +8,8 @@ const jwtAuth = (req, res, next) => {
   }
   try {
     const payload = jwt.verify(token, "zsrdDBqtZf");
+    console.log(payload);
+    req.userID = payload.userID;
   } catch (err) {
     console.log(err);
     return res.status(400).send(err);

@@ -26,6 +26,12 @@ export default class CommentsController{
     }
 
     updateComment(req, res){    // should update the comment
+        const data = req.body;
+        data.commentID = req.params.id;
 
+        const result = CommentsModel.update(data);
+        if(result){
+            res.status(201).send(result);
+        }
     }
 }

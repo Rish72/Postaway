@@ -7,7 +7,6 @@ const postRouter = express.Router();
 
 postRouter.get('/', postController.getAll)
 postRouter.get('/:id', postController.getOne)
-// postRouter.get('/:id', postController.getOne)
 
 postRouter.post("/addPost", upload.single('imageUrl'),postController.addPost);
 postRouter.delete("/delete/:id", postController.deletePost);
