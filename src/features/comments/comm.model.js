@@ -1,70 +1,75 @@
 import PostModel from "../posts/post.model.js";
 
-export default class CommentsModel{
+export default class CommentsModel {
+  constructor(id, postID, userID, content) {
+    this.id = id;
+    this.postID = postID;
+    this.userID = userID;
+    this.content = content;
+  }
 
-    constructor(id, postID , userID,content){
-        this.id = id;
-        this.postID = postID;
-        this.userID = userID ;
-        this.content = content;
+  static getAll(id) {
+    //! muje post kjo di jaa rhi h use lekr saare post pe loop kro or matching post ke sare comments show krdo
+    const post = PostModel.getOnePost(id);
+    if (post.comment) {
+      return post.comment;
+    } else {
+      return post; // this will return error coming from the post
     }
+  }
 
-    static getAll(id){
-        //! muje post kjo di jaa rhi h use lekr saare post pe loop kro or matching post ke sare comments show krdo 
-        const post = PostModel.getOnePost(id)
-        if(post.comment){
-            return post.comment;
-        }else{
-            return post; // this will return error coming from the post
-        }
+  static add(data) {
+    const { postID, content, userID } = data;
+    //! let userID = req.userID ---- when JWT is implemented attach it the req
+
+    const post = PostModel.getPosts().find((post) => post.id == postID); // add user check also
+    if (!post.comment) {
+      post.comment = []; //? verify && add on the basis of logged in user
+      //use contructor
+      const newComment = new CommentsModel(
+        post.comment.length + 1,
+        postID,
+        userID,
+        content
+      );
+      post.comment.push(newComment);
+
+      //after adding each comment I should also maintain a variable for keeping count of the comments;
+      //? CAN BE ACHIEVED BY JUST PRINTING THE LENGTH THE COMMENTS ARRAY OF THAT SPECIFIC POST
+      console.log("length of comments " + post.comment.length);
+      return post.comment;
+    } else { 
+      const newComment = new CommentsModel(
+        post.comment.length + 1,
+        postID,
+        userID,
+        content
+      );
+      post.comment.push(newComment);
+      return post.comment;
     }
+  }
 
-    static add(data){
-        const{postID,content} = data
-        //! let userID = req.userID ---- when JWT is implemented attach it the req
+  static delete(data) {
+    const { postID, commentID, userID } = data;
+  }
 
-        const post = PostModel.getPosts().find( post => post.id == postID ) // add user check also
-        if(!post.comment){
-            post.comment = [];
-            let userID = 23; //! verify && add on the basis of logged in user
+  static update(postID, commentID, userID, content) {
+    console.log(userID);
+    const post = PostModel.getPosts().find((post) => post.id == postID);
+    const comments = post.comment.find(
+      (comm) => comm.id == commentID && comm.userID == userID
+    );
 
-            //use contructor
-            const newComment = new CommentsModel(post.comment.length+1, postID, userID, content);
-            post.comment.push(newComment);
-
-
-            //after adding each comment I should also maintain a variable for keeping count of the comments; 
-            //? CAN BE ACHIEVED BY JUST PRINTING THE LENGTH THE COMMENTS ARRAY OF THAT SPECIFIC POST
-            console.log("length of comments "+post.comment.length); 
-            return post.comment;
-        }else {
-            let userID = 23; // verify && add on the basis of logged in user
-            const newComment = new CommentsModel(post.comment.length+1, postID, userID, content);
-            post.comment.push(newComment);
-            return post.comment;
-        }
-        
+    console.log("before updating the content ", comments);
+    if (comments) {
+      comments.content = content;
+      console.log("Updated comment content ", comments.content);
+      return { status: "Updated", msg: comments };
+    } else {
+      return { status: "Failed", msg: "Comment not found" };
     }
-
-    static delete(data){
-        const {postID , id} = data;
-    }
-
-    static update(data){
-        const {commentID, content, userID} = data;
-        const post = PostModel.getPosts().find( post => post.userID == userID) 
-        console.log("post in update "+post);
-        if(post && commentID > 1){
-            console.log("COmment id - 1 : "+ commentID - 1);
-            post.comment[commentID - 1].content = content;
-
-            return post;
-        }else {
-            return { "status" : "false", "msg" : "Post Not found"}
-        }
-
-    }
-
+  }
 }
 
 // comments api
