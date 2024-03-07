@@ -78,7 +78,21 @@ let posts = [
         id : 2, 
         userID : 1,
         caption: "New Post about Cars",
-        imageUrl : "https://static.autox.com/uploads/2022/11/2023-BMW-S1000RR.jpg"
+        imageUrl : "https://static.autox.com/uploads/2022/11/2023-BMW-S1000RR.jpg",
+        comment : [
+            {
+                id : 1,
+                postID : 2 ,
+                userID :  2,
+                content : "NICE POST"
+            } ,
+            {
+                id : 2,
+                postID : 2,
+                userID :  2,
+                content : "gOOD POST"
+            } 
+        ]
     },
     {
         id : 3,
